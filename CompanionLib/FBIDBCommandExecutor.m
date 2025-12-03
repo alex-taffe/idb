@@ -153,9 +153,9 @@ FBFileContainerKind const FBFileContainerKindFramework = @"framework";
     accessibilityCommands]
     onQueue:self.target.workQueue fmap:^ FBFuture * (id<FBAccessibilityCommands> commands) {
       if (value) {
-        return [commands accessibilityElementAtPoint:value.pointValue nestedFormat:nestedFormat];
+        return [commands accessibilityElementAtPoint:value.pointValue nestedFormat:nestedFormat keys:nil];
       } else {
-        return [commands accessibilityElementsWithNestedFormat:nestedFormat];
+        return [commands accessibilityElementsWithNestedFormat:nestedFormat keys:nil];
       }
     }];
 }
@@ -279,6 +279,20 @@ FBFileContainerKind const FBFileContainerKindFramework = @"framework";
         return [commands updateContacts:tempDirectory.path];
       }];
     }];
+}
+
+- (FBFuture<NSNull *> *)clear_contacts
+{
+  return [self.settingsCommands onQueue:self.target.workQueue fmap:^FBFuture *(id<FBSimulatorSettingsCommands> commands) {
+    return [commands clearContacts];
+  }];
+}
+
+- (FBFuture<NSNull *> *)clear_photos
+{
+  return [self.settingsCommands onQueue:self.target.workQueue fmap:^FBFuture *(id<FBSimulatorSettingsCommands> commands) {
+    return [commands clearPhotos];
+  }];
 }
 
 - (FBFuture<NSArray<id<FBXCTestDescriptor>> *> *)list_test_bundles

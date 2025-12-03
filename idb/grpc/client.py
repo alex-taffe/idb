@@ -19,7 +19,7 @@ from asyncio import StreamReader, StreamWriter
 from collections.abc import AsyncGenerator, AsyncIterable, AsyncIterator, Iterable
 from io import StringIO
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any
 
 import idb.common.plugin as plugin
 from grpclib.client import Channel
@@ -88,6 +88,7 @@ from idb.grpc.idb_pb2 import (
     ApproveRequest,
     ClearKeychainRequest,
     ConnectRequest,
+    ContactsClearRequest,
     ContactsUpdateRequest,
     CrashShowRequest,
     DebugServerRequest,
@@ -107,6 +108,7 @@ from idb.grpc.idb_pb2 import (
     MvRequest,
     OpenUrlRequest,
     Payload,
+    PhotosClearRequest,
     Point,
     PullRequest,
     PushRequest,
@@ -548,6 +550,14 @@ class Client(ClientBase):
         await self.stub.contacts_update(
             ContactsUpdateRequest(payload=Payload(data=data))
         )
+
+    @log_and_handle_exceptions("contacts_clear")
+    async def contacts_clear(self) -> None:
+        await self.stub.contacts_clear(ContactsClearRequest())
+
+    @log_and_handle_exceptions("photos_clear")
+    async def photos_clear(self) -> None:
+        await self.stub.photos_clear(PhotosClearRequest())
 
     @log_and_handle_exceptions("screenshot")
     async def screenshot(self) -> bytes:

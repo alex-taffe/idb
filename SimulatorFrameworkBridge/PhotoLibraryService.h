@@ -1,13 +1,15 @@
-/**
+/*
  * Copyright (c) Meta Platforms, Inc. and affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-#import <AccessibilityPlatformTranslation/NSCoding.h>
+#import <Foundation/Foundation.h>
 
-@protocol NSSecureCoding <NSCoding>
-+ (BOOL)supportsSecureCoding;
-@end
-
+/**
+ * Clears the photo library on the simulator.
+ *
+ * @return 0 on success, 1 on failure
+ */
+int handlePhotoLibraryAction(NSString *action);

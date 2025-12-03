@@ -106,6 +106,14 @@ final class CompanionServiceInterceptors: Idb_CompanionServiceServerInterceptorF
     commonInterceptors()
   }
 
+  func makecontacts_clearInterceptors() -> [ServerInterceptor<Idb_ContactsClearRequest, Idb_ContactsClearResponse>] {
+    commonInterceptors()
+  }
+
+  func makephotos_clearInterceptors() -> [ServerInterceptor<Idb_PhotosClearRequest, Idb_PhotosClearResponse>] {
+    commonInterceptors()
+  }
+
   func makesettingInterceptors() -> [ServerInterceptor<Idb_SettingRequest, Idb_SettingResponse>] {
     commonInterceptors()
   }

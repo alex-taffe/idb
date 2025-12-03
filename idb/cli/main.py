@@ -27,7 +27,7 @@ from idb.cli.commands.app import (
     AppUninstallCommand,
 )
 from idb.cli.commands.approve import ApproveCommand
-from idb.cli.commands.contacts import ContactsUpdateCommand
+from idb.cli.commands.contacts import ContactsClearCommand, ContactsUpdateCommand
 from idb.cli.commands.crash import (
     CrashDeleteCommand,
     CrashListCommand,
@@ -72,6 +72,7 @@ from idb.cli.commands.log import CompanionLogCommand, LogCommand
 from idb.cli.commands.media import MediaAddCommand
 from idb.cli.commands.memory import SimulateMemoryWarningCommand
 from idb.cli.commands.notification import SendNotificationCommand
+from idb.cli.commands.photos import PhotosClearCommand
 from idb.cli.commands.revoke import RevokeCommand
 from idb.cli.commands.screenshot import ScreenshotCommand
 from idb.cli.commands.settings import (
@@ -214,7 +215,12 @@ async def gen_main(cmd_input: list[str] | None = None) -> SysExitArg:
         CommandGroup(
             name="contacts",
             description="Contacts database operations on target",
-            commands=[ContactsUpdateCommand()],
+            commands=[ContactsUpdateCommand(), ContactsClearCommand()],
+        ),
+        CommandGroup(
+            name="photos",
+            description="Photos library operations on target",
+            commands=[PhotosClearCommand()],
         ),
         LogCommand(),
         CommandGroup(
