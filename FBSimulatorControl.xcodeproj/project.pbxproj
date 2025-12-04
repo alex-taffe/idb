@@ -3794,6 +3794,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AAA46E431C0CB92A009D6452 /* FBSimulatorControl.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				DEVELOPMENT_TEAM = 4N6R9BKQ29;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = 4N6R9BKQ29;
 			};
 			name = Debug;
 		};
@@ -3812,6 +3815,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AAA46E431C0CB92A009D6452 /* FBSimulatorControl.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				DEVELOPMENT_TEAM = 4N6R9BKQ29;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = 4N6R9BKQ29;
 			};
 			name = Profile;
 		};
@@ -3827,6 +3833,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AAA46E431C0CB92A009D6452 /* FBSimulatorControl.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				DEVELOPMENT_TEAM = 4N6R9BKQ29;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = 4N6R9BKQ29;
 			};
 			name = Release;
 		};
@@ -3886,7 +3896,10 @@
 			baseConfigurationReference = AAC8B25B1CEC52540034A865 /* FBDeviceControl.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
 				DEFINES_MODULE = YES;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = 4N6R9BKQ29;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -3986,6 +3999,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EEBD60341C9062E900298A07 /* FBControlCore.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 4N6R9BKQ29;
 			};
 			name = Debug;
 		};
@@ -3993,6 +4007,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EEBD60341C9062E900298A07 /* FBControlCore.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 4N6R9BKQ29;
 			};
 			name = Profile;
 		};
@@ -4000,6 +4015,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EEBD60341C9062E900298A07 /* FBControlCore.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
+				DEVELOPMENT_TEAM = 4N6R9BKQ29;
 			};
 			name = Release;
 		};
