@@ -543,7 +543,9 @@ static void MinicapCompressorCallback(void *outputCallbackRefCon, void *sourceFr
 
 - (void)didChangeIOSurface:(IOSurface *)surface
 {
-  [self mountSurface:surface error:nil];
+  if (![self mountSurface:surface error:nil]) {
+    return;
+  }
   [self pushFrame];
 }
 
@@ -560,6 +562,7 @@ static void MinicapCompressorCallback(void *outputCallbackRefCon, void *sourceFr
   if (oldBuffer) {
     CVPixelBufferRelease(oldBuffer);
   }
+  self.pixelBuffer = NULL;
   // Make a Buffer from the Surface
   CVPixelBufferRef buffer = NULL;
   CVReturn status = CVPixelBufferCreateWithIOSurface(
@@ -613,7 +616,9 @@ static void MinicapCompressorCallback(void *outputCallbackRefCon, void *sourceFr
   if (!pixelBufer || !consumer || !framePusher) {
     return;
   }
+  CVPixelBufferRetain(pixelBufer);
   if (!checkConsumerBufferLimit(consumer, self.logger)) {
+    CVPixelBufferRelease(pixelBufer);
     return;
   }
   
@@ -628,6 +633,7 @@ static void MinicapCompressorCallback(void *outputCallbackRefCon, void *sourceFr
 
   // Increment frame counter
   self.frameNumber = frameNumber + 1;
+  CVPixelBufferRelease(pixelBufer);
 }
 
 + (id<FBSimulatorVideoStreamFramePusher>)framePusherForConfiguration:(FBVideoStreamConfiguration *)configuration compressionSessionProperties:(NSDictionary<NSString *, id> *)compressionSessionProperties consumer:(id<FBDataConsumer>)consumer logger:(id<FBControlCoreLogger>)logger error:(NSError **)error
@@ -790,7 +796,9 @@ static void MinicapCompressorCallback(void *outputCallbackRefCon, void *sourceFr
       [self.logger logFormat:@"Push duration exceeded budget"];
     }
     lastPushedTime = clock_gettime_nsec_np(CLOCK_UPTIME_RAW);
-    [self pushFrame];
+    dispatch_sync(self.writeQueue, ^{
+      [self pushFrame];
+    });
   }
 }
 
